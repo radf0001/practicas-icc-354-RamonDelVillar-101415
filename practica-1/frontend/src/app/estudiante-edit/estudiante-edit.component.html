@@ -1,0 +1,23 @@
+<form class="estudiante-form" (ngSubmit)="onSubmit()" novalidate>
+  <mat-form-field class="estudiante-full-width">
+    <mat-label>Matricula</mat-label>
+    <input name="matricula" [(ngModel)]="estudiante.matricula" matInput type="number" required>
+  </mat-form-field>
+
+  <mat-form-field class="estudiante-full-width">
+    <mat-label>Nombre</mat-label>
+    <input name="nombre" [(ngModel)]="estudiante.nombre" matInput required>
+  </mat-form-field>
+
+  <mat-form-field class="estudiante-full-width">
+    <mat-label>Apellido</mat-label>
+    <input name="apellido" [(ngModel)]="estudiante.apellido" matInput required>
+  </mat-form-field>
+
+  <mat-form-field class="estudiante-full-width">
+    <mat-label>Telefono</mat-label>
+    <input name="telefono" [(ngModel)]="estudiante.telefono" matInput type="number" required>
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button>Guardar</button>
+</form>

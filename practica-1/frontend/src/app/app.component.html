@@ -1,0 +1,9 @@
+<div class="main">
+  <h1>Ingresar nuevo Estudiante</h1>
+  <app-estudiante-input (newDataEvent)="appendData($event)"/>
+
+  <h2>Mi lista de Estudiantes</h2>
+  <app-estudiante-wrapper *ngFor="let estudiante of estudiantes"
+                          (removeItemEvent)="removeItem($event)"
+                          [estudiante]="estudiante"/>
+</div>

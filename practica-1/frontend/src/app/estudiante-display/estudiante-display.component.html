@@ -1,0 +1,12 @@
+<p>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{estudiante.nombre}} {{estudiante.apellido}}</mat-card-title>
+      <mat-card-subtitle>{{estudiante.matricula}} ({{estudiante.telefono}})</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button (click)="editItemEvent.emit(estudiante.matricula)" mat-button>Editar</button>
+      <button (click)="removeItemEvent.emit(estudiante.matricula)" mat-button>Eliminar</button>
+    </mat-card-actions>
+  </mat-card>
+</p>

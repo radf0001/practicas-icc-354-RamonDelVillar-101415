@@ -1,0 +1,10 @@
+<p>
+  <app-estudiante-edit *ngIf="editable == true"
+                          (editDataEvent)="handleSaveEdition($event)"
+                          [estudiante]="estudiante"/>
+
+  <app-estudiante-display *ngIf="editable == false"
+                          (removeItemEvent)="removeItemEvent.emit($event)"
+                          (editItemEvent)="handleEditClick()"
+                          [estudiante]="estudiante"/>
+</p>

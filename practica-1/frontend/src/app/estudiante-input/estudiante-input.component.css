@@ -1,0 +1,9 @@
+.estudiante-full-width{
+  width: 100%;
+}
+
+.estudiante-form{
+  min-width: 50px;
+  max-width: 300px;
+  width: 100%;
+}
