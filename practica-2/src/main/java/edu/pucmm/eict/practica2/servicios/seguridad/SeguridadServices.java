@@ -4,7 +4,9 @@ import edu.pucmm.eict.practica2.entidades.seguridad.Rol;
 import edu.pucmm.eict.practica2.entidades.seguridad.Usuario;
 import edu.pucmm.eict.practica2.repositorio.seguridad.RolRepository;
 import edu.pucmm.eict.practica2.repositorio.seguridad.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +24,10 @@ public class SeguridadServices implements UserDetailsService {
 
     private UsuarioRepository usuarioRepository;
     private RolRepository rolRepository;
+
+    @Lazy
+    @Autowired
+    private JwtService jwtService;
     private PasswordEncoder passwordEncoder;
 
     public SeguridadServices(UsuarioRepository usuarioRepository, RolRepository rolRepository) {
@@ -56,6 +62,7 @@ public class SeguridadServices implements UserDetailsService {
             admin.setPassword(passwordEncoder.encode("admin"));
             admin.setNombre("Administrador");
             admin.setApellido("Admin");
+            admin.setRol("ROLE_ADMIN");
             admin.setRoles(new HashSet<>(Arrays.asList(rolAdmin)));
             admin.setActivo(true);
             usuarioRepository.save(admin);
@@ -67,6 +74,7 @@ public class SeguridadServices implements UserDetailsService {
             user.setApellido("User");
             user.setRoles(new HashSet<>(Arrays.asList(rolUsuario)));
             user.setActivo(true);
+            user.setRol("ROLE_USER");
             usuarioRepository.save(user);
         }
     }
@@ -112,6 +120,9 @@ public class SeguridadServices implements UserDetailsService {
         if(user==null || !user.isActivo()){
             throw new UsernameNotFoundException("Usuario no existe.");
         }
+
+        user.setToken(jwtService.generateToken(user.getUsername()).token());
+        usuarioRepository.save(user);
 
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
         for (Rol role : user.getRoles()) {

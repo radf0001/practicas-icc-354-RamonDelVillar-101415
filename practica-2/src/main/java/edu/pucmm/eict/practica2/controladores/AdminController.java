@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -109,6 +110,7 @@ public class AdminController {
                     temp.setNombre(usuario.getNombre());
                     temp.setApellido(usuario.getApellido());
                     temp.setUsername(usuario.getUsername());
+                    temp.setRol(usuario.getRol());
                     temp.setRoles(new HashSet<>(Arrays.asList(seguridadServices.rolFindById(usuario.getRol()))));
                     Usuario user;
                     if (temp.getPassword().equalsIgnoreCase(usuario.getPassword())) {
@@ -169,23 +171,23 @@ public class AdminController {
         params.put("logged",usuario);
         params.put("port", environment.getProperty("local.server.port"));
         params.put("hostname", InetAddress.getLoopbackAddress().getHostName());
-        if(usuario != null) {
-            if(id.isEmpty()){
-                List<Mock> mocks = mockServices.findAllByUsuario(usuario);
+        params.put("token", usuario.getToken());
+
+        if (id.isEmpty()) {
+            List<Mock> mocks = mockServices.findAllByUsuario(usuario);
+            params.put("mocks", mocks);
+            params.put("titulo", "Mis Mocks");
+        } else {
+            Usuario usuarioMocks = seguridadServices.findUsuarioById(id.get());
+            if (usuarioMocks != null) {
+                List<Mock> mocks = mockServices.findAllByUsuario(usuarioMocks);
                 params.put("mocks", mocks);
-                params.put("titulo","Mis Mocks");
-            }else{
-                Usuario usuarioMocks = seguridadServices.findUsuarioById(id.get());
-                if(usuarioMocks != null) {
-                    List<Mock> mocks = mockServices.findAllByUsuario(usuarioMocks);
-                    params.put("mocks", mocks);
-                    if (id.get() != usuario.getId())
-                        params.put("titulo", "Mocks de " + usuarioMocks.getUsername());
-                    else
-                        params.put("titulo","Mis Mocks");
-                }else{
-                    return new ModelAndView("redirect:/admin/mocks", params);
-                }
+                if (id.get() != usuario.getId())
+                    params.put("titulo", "Mocks de " + usuarioMocks.getUsername());
+                else
+                    params.put("titulo", "Mis Mocks");
+            } else {
+                return new ModelAndView("redirect:/admin/mocks", params);
             }
         }
 
@@ -228,6 +230,8 @@ public class AdminController {
                 redirectAttributes.addFlashAttribute("msg", "Ruta ya existe :(");
             }else{
                 mock.setUsuario(loggedUser);
+                LocalDateTime lt = LocalDateTime.now();
+                mock.setFechaExpiracion(lt.plusHours(Integer.parseInt(mock.getExpira())));
                 Mock newMock = mockServices.crearMock(mock);
                 if(newMock != null){
                     redirectAttributes.addFlashAttribute("msgSuccess", String.format("http://%s:%s/mock/%s",InetAddress.getLoopbackAddress().getHostName(), environment.getProperty("local.server.port"), newMock.getRuta()));
@@ -242,6 +246,8 @@ public class AdminController {
                 if (f && !temp.getRuta().equalsIgnoreCase(mock.getRuta())) {
                     redirectAttributes.addFlashAttribute("msg", "Nombre de ruta ya existe :(");
                 } else if (authentication.getName().equalsIgnoreCase(temp.getUsuario().getUsername())){
+                    LocalDateTime lt = LocalDateTime.now();
+                    temp.setFechaExpiracion(lt.plusHours(Integer.parseInt(mock.getExpira())));
                     temp.setNombre(mock.getNombre());
                     temp.setDescripcion(mock.getDescripcion());
                     temp.setRuta(mock.getRuta());
@@ -251,7 +257,6 @@ public class AdminController {
                     temp.setHeaders(mock.getHeaders());
                     temp.setExpira(mock.getExpira());
                     temp.setDemora(mock.getDemora());
-                    temp.setJwt(mock.getJwt());
 
                     Mock newMock = mockServices.crearMock(temp);
                     if (newMock != null) {

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.InetAddress;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,7 @@ public class UserController {
         params.put("logged", logged);
         params.put("port", environment.getProperty("local.server.port"));
         params.put("hostname", InetAddress.getLoopbackAddress().getHostName());
+        params.put("token", logged.getToken());
 
         return new ModelAndView("userMocks", params);
     }
@@ -82,6 +84,8 @@ public class UserController {
             {
                 redirectAttributes.addFlashAttribute("msg", "Ruta ya existe :(");
             }else{
+                LocalDateTime lt = LocalDateTime.now();
+                mock.setFechaExpiracion(lt.plusHours(Integer.parseInt(mock.getExpira())));
                 mock.setUsuario(loggedUser);
                 Mock newMock = mockServices.crearMock(mock);
                 if(newMock != null){
@@ -97,6 +101,8 @@ public class UserController {
                 if (f && !temp.getRuta().equalsIgnoreCase(mock.getRuta())) {
                     redirectAttributes.addFlashAttribute("msg", "Nombre de ruta ya existe :(");
                 } else if (authentication.getName().equalsIgnoreCase(temp.getUsuario().getUsername())){
+                    LocalDateTime lt = LocalDateTime.now();
+                    temp.setFechaExpiracion(lt.plusHours(Integer.parseInt(mock.getExpira())));
                     temp.setNombre(mock.getNombre());
                     temp.setDescripcion(mock.getDescripcion());
                     temp.setRuta(mock.getRuta());
@@ -106,7 +112,6 @@ public class UserController {
                     temp.setHeaders(mock.getHeaders());
                     temp.setExpira(mock.getExpira());
                     temp.setDemora(mock.getDemora());
-                    temp.setJwt(mock.getJwt());
 
                     Mock newMock = mockServices.crearMock(temp);
                     if (newMock != null) {

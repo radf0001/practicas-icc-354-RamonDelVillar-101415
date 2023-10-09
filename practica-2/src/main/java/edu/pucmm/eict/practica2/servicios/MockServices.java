@@ -5,12 +5,17 @@ import edu.pucmm.eict.practica2.entidades.seguridad.Usuario;
 import edu.pucmm.eict.practica2.repositorio.MockRepository;
 import edu.pucmm.eict.practica2.repositorio.seguridad.RolRepository;
 import edu.pucmm.eict.practica2.repositorio.seguridad.UsuarioRepository;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@EnableScheduling
 public class MockServices{
     private MockRepository mockRepository;
 
@@ -40,4 +45,10 @@ public class MockServices{
     }
 
     public Mock findByRuta(String ruta){return mockRepository.findByRuta(ruta);}
+
+    @Transactional
+    @Scheduled(fixedRate = 900000)
+    public void deleteByFechaExpiracionLessThan(){
+        mockRepository.deleteAllByFechaExpiracionLessThan(LocalDateTime.now());
+    }
 }

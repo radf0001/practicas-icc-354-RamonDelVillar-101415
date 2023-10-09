@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="h-full bg-white"
-        lang="en">
+      lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta

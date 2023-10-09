@@ -145,8 +145,10 @@
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
-                            <p class="mt-2 text-sm text-gray-600">
+                            <p class="mt-2 text-sm text-gray-600 break-all">
                                 Una lista con todos los mocks de un usuario incluyendo su nombre, status, content-type y duracion <strong>(Presione cualquier mock para ir a su endpoint).</strong>
+                                <br><br>
+                                TOKEN JWT: <strong>${token}</strong>
                             </p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -262,7 +264,7 @@
                                                 <p class="flex mt-1 text-xs leading-5 text-white">
                                                     <span class="relative truncate bg-sky-600 rounded-lg">&nbsp;${mock.getCodigo()}&nbsp;</span>&nbsp;
                                                     <span class="relative truncate bg-emerald-600 rounded-lg">&nbsp;${mock.getContentType()}&nbsp;</span>&nbsp;
-                                                    <span class="relative truncate bg-indigo-700 rounded-lg">&nbsp;${mock.getExpira()}&nbsp;</span>
+                                                    <span class="relative truncate bg-indigo-700 rounded-lg">&nbsp;${mock.getFechaExpiracion()}&nbsp;</span>
                                                 </p>
                                             </div>
                                         </div>

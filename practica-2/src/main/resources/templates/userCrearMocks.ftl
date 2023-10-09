@@ -358,46 +358,38 @@
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-emerald-500 placeholder:text-gray-400"
                                                 name="expira" id="expira" required>
-                                            <#if datos.getExpira() == "agno">
-                                                <option value="agno" selected>1 Año</option>
+                                            <#if datos.getExpira() == "8760">
+                                                <option value="8760" selected>1 Año</option>
                                             <#else>
-                                                <option value="agno">1 Año</option>
+                                                <option value="8760">1 Año</option>
                                             </#if>
-                                            <#if datos.getExpira() == "hora">
-                                                <option value="hora" selected>1 Hora</option>
+                                            <#if datos.getExpira() == "1">
+                                                <option value="1" selected>1 Hora</option>
                                             <#else>
-                                                <option value="hora">1 Hora</option>
+                                                <option value="1">1 Hora</option>
                                             </#if>
-                                            <#if datos.getExpira() == "dia">
-                                                <option value="dia" selected>1 Dia</option>
+                                            <#if datos.getExpira() == "24">
+                                                <option value="24" selected>1 Dia</option>
                                             <#else>
-                                                <option value="dia">1 Dia</option>
+                                                <option value="24">1 Dia</option>
                                             </#if>
-                                            <#if datos.getExpira() == "semana">
-                                                <option value="semana" selected>1 Semana</option>
+                                            <#if datos.getExpira() == "168">
+                                                <option value="168" selected>1 Semana</option>
                                             <#else>
-                                                <option value="semana">1 Semana</option>
+                                                <option value="168">1 Semana</option>
                                             </#if>
-                                            <#if datos.getExpira() == "mes">
-                                                <option value="mes" selected>1 Mes</option>
+                                            <#if datos.getExpira() == "730">
+                                                <option value="730" selected>1 Mes</option>
                                             <#else>
-                                                <option value="mes">1 Mes</option>
+                                                <option value="730">1 Mes</option>
                                             </#if>
                                         </select>
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
-                                        <#--                                        <h3 class="text-lg font-semibold leading-6 text-gray-800">-->
-                                        <#--                                            Validar vía JWT el acceso al endpoint-->
-                                        <#--                                        </h3>-->
-                                        <#--                                        <input type="text" name="jwt" id="jwt"-->
-                                        <#--                                               class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-emerald-500 placeholder:text-gray-400"-->
-                                        <#--                                               placeholder="Json Web Token" required />-->
-                                        <#if datos.getJwt()??>
-                                            <input type="checkbox" id="jwt" name="jwt" value="jwt" checked class="ring-0 outline-none py-2 border-b border-b-emerald-500 accent-emerald-600">
-                                        <#else>
-                                            <input type="checkbox" id="jwt" name="jwt" value="jwt" class="ring-0 outline-none py-2 border-b border-b-emerald-500 accent-emerald-600">
-                                        </#if>
-                                        <label class="text-lg font-semibold leading-6 text-gray-800" for="jwt">Validar vía JWT el acceso al endpoint</label>
+                                        <h3 class="text-lg font-semibold leading-6 text-gray-800">
+                                            Todos los mocks son creados para ser validados via JWT o NO, para validar via JWT entre al endpoint
+                                            http://localhost:8080/mock/jwt/{ruta_de_su_mock}
+                                        </h3>
                                     </div>
 
                                     <div class="mt-5">
@@ -511,22 +503,18 @@
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-emerald-500 placeholder:text-gray-400"
                                                 name="expira" id="expira" required>
-                                            <option value="agno">1 Año</option>
-                                            <option value="hora">1 Hora</option>
-                                            <option value="dia">1 Mes</option>
-                                            <option value="semana">1 Semana</option>
-                                            <option value="mes">1 Mes</option>
+                                            <option value="8760">1 Año</option>
+                                            <option value="1">1 Hora</option>
+                                            <option value="24">1 Dia</option>
+                                            <option value="168">1 Semana</option>
+                                            <option value="730">1 Mes</option>
                                         </select>
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
-                                        <#--                                        <h3 class="text-lg font-semibold leading-6 text-gray-800">-->
-                                        <#--                                            Validar vía JWT el acceso al endpoint-->
-                                        <#--                                        </h3>-->
-                                        <#--                                        <input type="text" name="jwt" id="jwt"-->
-                                        <#--                                               class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-emerald-500 placeholder:text-gray-400"-->
-                                        <#--                                               placeholder="Json Web Token" required />-->
-                                        <input type="checkbox" id="jwt" name="jwt" value="jwt" class="ring-0 outline-none py-2 border-b border-b-emerald-500 accent-emerald-600">
-                                        <label class="text-lg font-semibold leading-6 text-gray-800" for="jwt">Validar vía JWT el acceso al endpoint</label>
+                                        <h3 class="text-lg font-semibold leading-6 text-gray-800">
+                                            Todos los mocks son creados para ser validados via JWT o NO, para validar via JWT entre al endpoint
+                                            http://localhost:8080/mock/jwt/{ruta_de_su_mock}
+                                        </h3>
                                     </div>
 
                                     <!-- Submit Button -->

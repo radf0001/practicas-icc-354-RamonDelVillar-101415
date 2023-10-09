@@ -4,13 +4,19 @@ import edu.pucmm.eict.practica2.servicios.seguridad.SeguridadServices;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -34,11 +40,13 @@ public class ConfiguracionSeguridad {
     //Opción JPA
     private SeguridadServices seguridadServices;
     private PasswordEncoder passwordEncoder;
+    private JWTAutorizacionFilter jwtAutorizacionFilter;
 
-    public ConfiguracionSeguridad(DataSource dataSource, SeguridadServices seguridadServices, PasswordEncoder passwordEncoder) {
+    public ConfiguracionSeguridad(DataSource dataSource, SeguridadServices seguridadServices, PasswordEncoder passwordEncoder, JWTAutorizacionFilter jwtAutorizacionFilter) {
         this.dataSource = dataSource;
         this.seguridadServices = seguridadServices;
         this.passwordEncoder = passwordEncoder;
+        this.jwtAutorizacionFilter = jwtAutorizacionFilter;
     }
 
     /**
@@ -51,6 +59,18 @@ public class ConfiguracionSeguridad {
     @Bean
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
         return new MvcRequestMatcher.Builder(introspector);
+    }
+
+    /**
+     * Authenticador Provider utilizando JPA.
+     * @return
+     */
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(seguridadServices);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return authProvider;
     }
 
     /**
@@ -95,6 +115,35 @@ public class ConfiguracionSeguridad {
 
 
         return auth.build();
+    }
+
+    /**
+     * Configurando dos filtros diferentes, en este caso para no almacenar las peticiones en la sesion
+     * para el caso de JWT en Spring Boot.
+     * @param http
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    @Order(1) //indica el orden del bean en inicializar
+    public SecurityFilterChain securityFilterApi(HttpSecurity http) throws Exception {
+        return http
+                .securityMatcher("/mock/jwt/**")
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests( authorization -> {
+                    try {
+                        authorization
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/mock/jwt/**")).authenticated()
+                                .and().sessionManagement()
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                .and()
+                                .authenticationProvider(authenticationProvider())
+                                .addFilterBefore(jwtAutorizacionFilter, UsernamePasswordAuthenticationFilter.class);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .build();
     }
 
     /**

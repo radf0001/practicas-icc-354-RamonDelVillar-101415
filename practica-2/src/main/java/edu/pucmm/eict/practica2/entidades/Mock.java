@@ -4,6 +4,7 @@ import edu.pucmm.eict.practica2.entidades.seguridad.Usuario;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -32,7 +33,8 @@ public class Mock implements Serializable {
     private int demora;
 
     private String expira;
-    private String jwt;
+
+    private LocalDateTime fechaExpiracion;
 
     public int getId() {
         return id;
@@ -122,11 +124,11 @@ public class Mock implements Serializable {
         this.expira = expira;
     }
 
-    public String getJwt() {
-        return jwt;
+    public LocalDateTime getFechaExpiracion() {
+        return fechaExpiracion;
     }
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
+    public void setFechaExpiracion(LocalDateTime fechaExpiracion) {
+        this.fechaExpiracion = fechaExpiracion;
     }
 }

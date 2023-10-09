@@ -19,6 +19,8 @@ public class Usuario implements Serializable {
 
     private boolean activo;
 
+    private String token;
+
     //relación
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private
@@ -86,5 +88,13 @@ public class Usuario implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
