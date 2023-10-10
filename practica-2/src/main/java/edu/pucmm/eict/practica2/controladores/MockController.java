@@ -59,7 +59,7 @@ public class MockController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @RequestMapping(value="jwt/{ruta}")
+    @RequestMapping(value="/jwt/{ruta}")
     public ResponseEntity<String> mockJwt(@PathVariable String ruta) throws JsonProcessingException {
         Mock mock = mockServices.findByRuta(ruta);
         if(mock!=null){

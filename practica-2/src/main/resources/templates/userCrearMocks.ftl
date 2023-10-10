@@ -388,7 +388,7 @@
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
                                             Todos los mocks son creados para ser validados via JWT o NO, para validar via JWT entre al endpoint
-                                            http://localhost:8080/mock/jwt/{ruta_de_su_mock}
+                                            http://${hostname}:${port}/mock/jwt/{ruta_de_su_mock}
                                         </h3>
                                     </div>
 
@@ -513,7 +513,7 @@
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
                                             Todos los mocks son creados para ser validados via JWT o NO, para validar via JWT entre al endpoint
-                                            http://localhost:8080/mock/jwt/{ruta_de_su_mock}
+                                            http://${hostname}:${port}/mock/jwt/{ruta_de_su_mock}
                                         </h3>
                                     </div>
 
