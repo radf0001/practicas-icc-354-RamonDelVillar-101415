@@ -156,7 +156,7 @@
                             </p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a href="/admin/mock" type="button"
+                            <a href="/admin/mock?localeData=es" type="button"
                                class="block px-3 py-2 text-sm font-semibold text-center text-white rounded-md shadow-sm bg-sky-600 hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                 Nuevo Mock
                             </a>
@@ -274,7 +274,7 @@
                                         </div>
                                         <#if titulo == "Mis Mocks">
                                             <div class="flex flex-col md:flex-row md:justify-center">
-                                                <a href="/admin/mock?id=${mock.getId()}" type="button"
+                                                <a href="/admin/mock?id=${mock.getId()}&localeData=es" type="button"
                                                    class="relative truncate text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                                                     Editar
                                                 </a>
@@ -284,7 +284,7 @@
                                                 </a>
                                             </div>
                                         <#else>
-                                            <a href="/admin/mock?id=${mock.getId()}" type="button"
+                                            <a href="/admin/mock?id=${mock.getId()}&localeData=es" type="button"
                                                class="relative truncate text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                                                 Ver
                                             </a>

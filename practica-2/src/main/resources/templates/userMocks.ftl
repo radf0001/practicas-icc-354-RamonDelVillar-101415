@@ -152,7 +152,7 @@
                             </p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a href="/user/mock" type="button"
+                            <a href="/user/mock?localeData=es" type="button"
                                class="block px-3 py-2 text-sm font-semibold text-center text-white rounded-md shadow-sm bg-emerald-600 hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
                                 Nuevo Mock
                             </a>
@@ -269,7 +269,7 @@
                                             </div>
                                         </div>
                                         <div class="flex flex-col md:flex-row md:justify-center">
-                                            <a href="/user/mock?id=${mock.getId()}" type="button"
+                                            <a href="/user/mock?id=${mock.getId()}&localeData=es" type="button"
                                                class="relative truncate text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                                                 Editar
                                             </a>

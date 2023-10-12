@@ -41,7 +41,7 @@
                             <div class="flex space-x-4">
                                 <!-- Current: "bg-sky-700 text-white", Default: "text-white hover:bg-sky-500 hover:bg-opacity-75" -->
                                 <a href="/admin/"
-                                   class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Usuarios</a>
+                                   class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75"><@spring.message "users"/></a>
                                 <a href="/admin/mocks"
                                    class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Mocks</a>
                             </div>
@@ -70,7 +70,11 @@
                                  class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
-                                   tabindex="-1" id="user-menu-item-2">Cerrar Sesion</a>
+                                   tabindex="-1" id="user-menu-item-2"><@spring.message "sesion"/></a>
+                                <a href="/admin/mock?localeData=en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                                   tabindex="-1" id="user-menu-item-2"><@spring.message "ingles"/></a>
+                                <a href="/admin/mock?localeData=es" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                                   tabindex="-1" id="user-menu-item-2"><@spring.message "espanol"/></a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +105,7 @@
             <div x-show="mobileMenuOpen" class="sm:hidden" id="mobile-menu">
                 <div class="pt-2 pb-3 space-y-1">
                     <a href="/admin/"
-                       class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Usuarios</a>
+                       class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75"><@spring.message "users"/></a>
                     <a href="/admin/mocks"
                        class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Mocks</a>
                 </div>
@@ -127,7 +131,11 @@
                     </div>
                     <div class="px-2 mt-3 space-y-1">
                         <a href="/logout"
-                           class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Cerrar Sesion</a>
+                           class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75"><@spring.message "sesion"/></a>
+                        <a href="/admin/mock?localeData=en"
+                           class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75"><@spring.message "ingles"/></a>
+                        <a href="/admin/mock?localeData=es"
+                           class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75"><@spring.message "espanol"/></a>
                     </div>
                 </div>
             </div>
@@ -136,7 +144,7 @@
         <header class="py-10">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold tracking-tight text-white">
-                    Crear Mock
+                    <@spring.message "crear_mock"/>
                 </h1>
             </div>
         </header>
@@ -149,10 +157,10 @@
                     <div
                             class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
                         <dt class="text-sm font-medium leading-6 text-gray-500">
-                            Método de acceso
+                            <@spring.message "aceso"/>
                         </dt>
                         <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">
-                            (Get, Post, Put, Patch, Delete y Options)
+                            <@spring.message "metodos"/>
                         </dd>
                     </div>
                 </dl>
@@ -258,35 +266,35 @@
                                     <!-- Input Field -->
                                     <div class="relative mt-2 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Nombre
+                                            <@spring.message "nombre"/>
                                         </h3>
                                         <input type="text" name="nombre" id="nombre" value="${datos.getNombre()}"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
-                                               placeholder="Nombre Mock" required />
+                                               placeholder=<@spring.message "nombre"/> required />
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Descripcion corta
+                                            <@spring.message "descripcion"/>
                                         </h3>
                                         <input type="text" name="descripcion" id="descripcion" value="${datos.getDescripcion()}"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
-                                               placeholder="Descripcion" required />
+                                               placeholder=<@spring.message "descripcion"/> required />
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Ruta Endpoint
+                                            <@spring.message "ruta"/>
                                         </h3>
                                         <div class="pointer-events-none absolute left-0 flex items-center pl-0 py-2">
                                             <span class="text-gray-400">http://${hostname}:${port}/mock/</span>
                                         </div>
                                         <input type="text" name="ruta" id="ruta" value="${datos.getRuta()}"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400 pl-48"
-                                               placeholder="Ruta del endpoint" required />
+                                               placeholder=<@spring.message "ruta"/> required />
                                     </div>
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Código de respuesta HTTP
+                                            <@spring.message "codes"/>
                                         </h3>
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -303,7 +311,7 @@
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Content-Type
+                                            <@spring.message "content"/>
                                         </h3>
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -320,7 +328,7 @@
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Headers
+                                            <@spring.message "headers"/>
                                         </h3>
                                         <textarea id="headers" name="headers" rows="3"
                                                   class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -331,7 +339,7 @@
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Cuerpo de Mensaje
+                                            <@spring.message "cuerpo"/>
                                         </h3>
                                         <textarea id="cuerpo" name="cuerpo" rows="11"
                                                   class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -349,50 +357,49 @@
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Demora de respuesta (seg)
+                                            <@spring.message "demora"/>
                                         </h3>
                                         <input type="number" name="demora" id="demora" value="${datos.getDemora()}"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
-                                               placeholder="Tiempo para demora de respuesta en segundos" required />
+                                               placeholder=<@spring.message "demora"/> required />
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Tiempo de expiración
+                                            <@spring.message "tiempo"/>
                                         </h3>
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
                                                 name="expira" id="expira" required>
                                             <#if datos.getExpira() == "8760">
-                                                <option value="8760" selected>1 Año</option>
+                                                <option value="8760" selected><@spring.message "year"/></option>
                                             <#else>
-                                                <option value="8760">1 Año</option>
+                                                <option value="8760"><@spring.message "year"/></option>
                                             </#if>
                                             <#if datos.getExpira() == "1">
-                                                <option value="1" selected>1 Hora</option>
+                                                <option value="1" selected><@spring.message "hour"/></option>
                                             <#else>
-                                                <option value="1">1 Hora</option>
+                                                <option value="1"><@spring.message "hour"/></option>
                                             </#if>
                                             <#if datos.getExpira() == "24">
-                                                <option value="24" selected>1 Dia</option>
+                                                <option value="24" selected><@spring.message "day"/></option>
                                             <#else>
-                                                <option value="24">1 Dia</option>
+                                                <option value="24"><@spring.message "day"/></option>
                                             </#if>
                                             <#if datos.getExpira() == "168">
-                                                <option value="168" selected>1 Semana</option>
+                                                <option value="168" selected><@spring.message "week"/></option>
                                             <#else>
-                                                <option value="168">1 Semana</option>
+                                                <option value="168"><@spring.message "week"/></option>
                                             </#if>
                                             <#if datos.getExpira() == "730">
-                                                <option value="730" selected>1 Mes</option>
+                                                <option value="730" selected><@spring.message "month"/></option>
                                             <#else>
-                                                <option value="730">1 Mes</option>
+                                                <option value="730"><@spring.message "month"/></option>
                                             </#if>
                                         </select>
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Todos los mocks son creados para ser validados via JWT o NO, para validar via JWT entre al endpoint
-                                            http://${hostname}:${port}/mock/jwt/{ruta_de_su_mock}
+                                            <@spring.message "jwt"/> http://${hostname}:${port}/mock/jwt/<@spring.message "route_of_your_mock"/>}
                                         </h3>
                                     </div>
 
@@ -400,12 +407,12 @@
                                         <#if userMock??>
                                         <a href="/admin/mocks?id=${userMock.getId()}" type="button"
                                            class="w-full px-6 py-3.5 text-base font-medium text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-lg sm:text-xl text-center">
-                                            Cancelar
+                                            <@spring.message "button_cancel"/>
                                         </a>
                                         <#else>
                                         <button type="submit"
                                                 class="w-full px-6 py-3.5 text-base font-medium text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-lg sm:text-xl text-center">
-                                            Guardar
+                                            <@spring.message "button"/>
                                         </button>
                                     </div>
                                     </#if>
@@ -418,35 +425,35 @@
                                     <!-- Input Field -->
                                     <div class="relative mt-2 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Nombre
+                                            <@spring.message "nombre"/>
                                         </h3>
                                         <input type="text" name="nombre" id="nombre"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
-                                               placeholder="Nombre Mock" required />
+                                               placeholder="<@spring.message "nombre"/>" required />
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Descripcion corta
+                                            <@spring.message "descripcion"/>
                                         </h3>
                                         <input type="text" name="descripcion" id="descripcion"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
-                                               placeholder="Descripcion" required />
+                                               placeholder=<@spring.message "descripcion"/> required />
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Ruta Endpoint
+                                            <@spring.message "ruta"/>
                                         </h3>
                                         <div class="pointer-events-none absolute left-0 flex items-center pl-0 py-2">
                                             <span class="text-gray-400">http://${hostname}:${port}/mock/</span>
                                         </div>
                                         <input type="text" name="ruta" id="ruta"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400 pl-48"
-                                               placeholder="Ruta del endpoint" required />
+                                               placeholder=<@spring.message "ruta"/> required />
                                     </div>
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Código de respuesta HTTP
+                                            <@spring.message "codes"/>
                                         </h3>
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -459,7 +466,7 @@
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Content-Type
+                                            <@spring.message "content"/>
                                         </h3>
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -472,7 +479,7 @@
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Headers
+                                            <@spring.message "headers"/>
                                         </h3>
                                         <textarea id="headers" name="headers" rows="3"
                                                   class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -483,7 +490,7 @@
 
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Cuerpo de Mensaje
+                                            <@spring.message "cuerpo"/>
                                         </h3>
                                         <textarea id="cuerpo" name="cuerpo" rows="11"
                                                   class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
@@ -501,30 +508,29 @@
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Demora de respuesta (seg)
+                                            <@spring.message "demora"/>
                                         </h3>
                                         <input type="number" name="demora" id="demora" value="0"
                                                class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
-                                               placeholder="Tiempo para demora de respuesta en segundos" required />
+                                               placeholder=<@spring.message "demora"/> required />
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Tiempo de expiración
+                                            <@spring.message "tiempo"/>
                                         </h3>
                                         <select
                                                 class="block w-full ring-0 outline-none py-2 text-gray-800 border-b border-b-sky-500 placeholder:text-gray-400"
                                                 name="expira" id="expira" required>
-                                            <option value="8760">1 Año</option>
-                                            <option value="1">1 Hora</option>
-                                            <option value="24">1 Dia</option>
-                                            <option value="168">1 Semana</option>
-                                            <option value="730">1 Mes</option>
+                                            <option value="8760"><@spring.message "year"/></option>
+                                            <option value="1"><@spring.message "hour"/></option>
+                                            <option value="24"><@spring.message "day"/></option>
+                                            <option value="168"><@spring.message "week"/></option>
+                                            <option value="730"><@spring.message "month"/></option>
                                         </select>
                                     </div>
                                     <div class="relative mt-4 md:mt-8 rounded-md">
                                         <h3 class="text-lg font-semibold leading-6 text-gray-800">
-                                            Todos los mocks son creados para ser validados via JWT o NO, para validar via JWT entre al endpoint
-                                            http://${hostname}:${port}/mock/jwt/{ruta_de_su_mock}
+                                            <@spring.message "jwt"/> http://${hostname}:${port}/mock/jwt/<@spring.message "route_of_your_mock"/>
                                         </h3>
                                     </div>
 
@@ -532,7 +538,7 @@
                                     <div class="mt-5">
                                         <button type="submit"
                                                 class="w-full px-6 py-3.5 text-base font-medium text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-lg sm:text-xl text-center">
-                                            Guardar
+                                            <@spring.message "button"/>
                                         </button>
                                     </div>
                                 </form>
