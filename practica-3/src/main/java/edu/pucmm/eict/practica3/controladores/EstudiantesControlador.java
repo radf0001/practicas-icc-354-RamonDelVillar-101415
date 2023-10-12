@@ -66,7 +66,6 @@ public class EstudiantesControlador {
                 redirectAttributes.addFlashAttribute("msg", "Matricula ya existe :(");
             }else{
                 Estudiante student = estudianteService.save(estudiante);
-                System.out.println(student);
                 if(student != null){
                     redirectAttributes.addFlashAttribute("msg", "Estudiante creado exitosamente :)");
                 }else{

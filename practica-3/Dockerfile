@@ -8,11 +8,13 @@ RUN gradle bootjar --no-daemon
 # Utilizando uan imagen con lo necesario para arrancar la aplicación.
 # en Java las imagenes slim son las mas pequeñas en ese tipo.
 FROM eclipse-temurin:17.0.8.1_1-jre-alpine
+VOLUME volume-logs
+
 # Variable de Sistema Puerto
-ENV VA_PUERTO=8080
+ENV SERVER_PORT=8080
 # Indicando el puerto para exponer, debo pasar el flag -p para habilitarlo o -P para publicarlos todos.
 # No es necesario exponer ningun puerto, la propia instancia se reportará a Eureka.
-EXPOSE 8080
+EXPOSE ${SERVER_PORT}
 # creando la carpeta para el proyecto
 RUN mkdir /app
 # desde la otra instancia estaremos copiando lo necesario

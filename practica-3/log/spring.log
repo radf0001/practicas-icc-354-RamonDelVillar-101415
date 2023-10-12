@@ -1,0 +1,51 @@
+2023-10-12T18:10:29.115-04:00  INFO 14868 --- [restartedMain] e.p.eict.practica3.Practica3Application  : Starting Practica3Application using Java 17.0.7 with PID 14868 (C:\Users\ramon\OneDrive\Escritorio\septiembre23\web-avanzada\practicas-icc-354-RamonDelVillar-101415\practica-3\build\classes\java\main started by ramon in C:\Users\ramon\OneDrive\Escritorio\septiembre23\web-avanzada\practicas-icc-354-RamonDelVillar-101415\practica-3)
+2023-10-12T18:10:29.119-04:00  INFO 14868 --- [restartedMain] e.p.eict.practica3.Practica3Application  : No active profile set, falling back to 1 default profile: "default"
+2023-10-12T18:10:29.207-04:00  INFO 14868 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-10-12T18:10:29.208-04:00  INFO 14868 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-10-12T18:10:30.536-04:00  INFO 14868 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-12T18:10:30.840-04:00  INFO 14868 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 278 ms. Found 1 JPA repository interfaces.
+2023-10-12T18:10:31.936-04:00  INFO 14868 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-10-12T18:10:31.952-04:00  INFO 14868 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-10-12T18:10:31.953-04:00  INFO 14868 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-10-12T18:10:32.222-04:00  INFO 14868 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-10-12T18:10:32.223-04:00  INFO 14868 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3013 ms
+2023-10-12T18:10:32.274-04:00  INFO 14868 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-10-12T18:10:32.669-04:00  INFO 14868 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:cruddb user=SA
+2023-10-12T18:10:32.672-04:00  INFO 14868 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-10-12T18:10:32.686-04:00  INFO 14868 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:cruddb'
+2023-10-12T18:10:32.911-04:00  INFO 14868 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-12T18:10:33.062-04:00  INFO 14868 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
+2023-10-12T18:10:33.066-04:00  INFO 14868 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-10-12T18:10:33.570-04:00  INFO 14868 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-12T18:10:33.946-04:00  INFO 14868 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-12T18:10:34.370-04:00  INFO 14868 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-12T18:10:35.921-04:00  INFO 14868 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-12T18:10:36.023-04:00 DEBUG 14868 --- [restartedMain] org.hibernate.SQL                        : create table estudiante (matricula integer not null, apellido varchar(255), nombre varchar(255), telefono varchar(255), primary key (matricula))
+2023-10-12T18:10:36.038-04:00  INFO 14868 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-12T18:10:36.925-04:00  WARN 14868 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-12T18:10:37.120-04:00  INFO 14868 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-10-12T18:10:37.938-04:00  INFO 14868 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-10-12T18:10:37.978-04:00  WARN 14868 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2023-10-12T18:10:37.981-04:00  INFO 14868 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-12T18:10:38.210-04:00  WARN 14868 --- [restartedMain] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: La base de datos ya esta cerrada (para des-habilitar el cerrado automatico durante el shutdown de la VM, agregue ";DB_CLOSE_ON_EXIT=FALSE" a la URL de conexión)
+Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2023-10-12T18:10:38.213-04:00  INFO 14868 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-10-12T18:10:38.222-04:00  INFO 14868 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-10-12T18:10:38.230-04:00  INFO 14868 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-10-12T18:10:38.293-04:00  INFO 14868 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-10-12T18:10:38.338-04:00 ERROR 14868 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
