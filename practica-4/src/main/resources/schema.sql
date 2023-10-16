@@ -1,1 +1,1 @@
-CREATE DATABASE IF NOT EXISTS micro_estudiante;
+CREATE DATABASE IF NOT EXISTS practica_mock;

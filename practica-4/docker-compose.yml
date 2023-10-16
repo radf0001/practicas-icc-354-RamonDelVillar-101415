@@ -24,7 +24,7 @@ services:
   base-datos-app-web:
     image: mysql:5.7.26
     ports:
-      - ${PUERTO_DB}:3306
+      - ${PUERTO_DB}:${DB_PORT}
     env_file:
       - .env
     environment:
@@ -32,7 +32,7 @@ services:
       - MYSQL_USER=$DB_USER
       - MYSQL_DATABASE=$DB_NAME
     volumes:   #volumen de datos utilizado.
-      - mi-volumen-bd:/var/lib/mysql
+      - mi-volumen-bd:${DB_UBI}
     networks:
       - red-app
 
