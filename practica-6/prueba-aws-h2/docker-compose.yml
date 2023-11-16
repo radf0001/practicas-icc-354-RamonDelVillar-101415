@@ -1,0 +1,88 @@
+#indica la version de Docker Compose utilizada
+version: '3.9'
+#Bloque de servicios, indica los contenedores a utilizar.
+services:
+  weba:       #nombre del servicio
+    #    build: ./practica-4
+    image: radf0001/practica-6-app-h2-web:latest
+    env_file: #Indica el parametro para
+      - .env
+    environment:    #variable de ambiente
+      - NOMBRE_APP=$AMBIENTE
+      - server.port=8080
+    expose:
+      - 8080
+    restart: always
+    networks:    #red para conectar los equipos.
+      - red-app
+    depends_on:   #indica que primero debe subir los servicios indicados.
+      - base-datos-app-web
+
+  webb: #nombre del servicio
+    #    build: ./practica-4
+    image: radf0001/practica-6-app-h2-web:latest
+    env_file: #Indica el parametro para
+      - .env
+    environment: #variable de ambiente
+      - NOMBRE_APP=$AMBIENTE
+      - server.port=8081
+    expose:
+      - 8081
+    restart: always
+    networks: #red para conectar los equipos.
+      - red-app
+    depends_on: #indica que primero debe subir los servicios indicados.
+      - base-datos-app-web
+
+  webc: #nombre del servicio
+    #    build: ./practica-4
+    image: radf0001/practica-6-app-h2-web:latest
+    env_file: #Indica el parametro para
+      - .env
+    environment: #variable de ambiente
+      - NOMBRE_APP=$AMBIENTE
+      - server.port=8082
+    expose:
+      - 8082
+    restart: always
+    networks: #red para conectar los equipos.
+      - red-app
+    depends_on: #indica que primero debe subir los servicios indicados.
+      - base-datos-app-web
+
+  base-datos-app-web:
+    image: oscarfonts/h2:alpine
+    env_file: #Indica el parametro para
+      - .env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - h2-data:/h2-data
+    environment:
+      H2_OPTIONS: "-tcp -tcpAllowOthers -tcpPort 9092 -ifNotExists"
+    networks:
+      - red-app
+
+  haproxy:
+    environment:
+      - CERT1=lb.playdomtv.me
+      - EMAIL=radf0001@ce.pucmm.edu.do
+      - STAGING=false
+    volumes:
+      - ./haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg
+    links:
+      - weba
+      - webb
+      - webc
+    networks:
+      - red-app
+    ports:
+      - '80:80'
+      - '443:443'
+    image: 'ghcr.io/tomdess/docker-haproxy-certbot:master'
+
+networks:  #bloque para las redes
+  red-app:   #indicando la red definida
+
+volumes: #Bloque para definir los volumenes
+  h2-data:
