@@ -57,11 +57,11 @@ public class ConfiguracionSeguridad {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
         http.authorizeHttpRequests(authorization ->
                         authorization
-//                                .requestMatchers(AntPathRequestMatcher.antMatcher("/")).hasAnyRole("ADMIN", "USER") //permitiendo llamadas a esas urls.
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).permitAll()
-//                                .requestMatchers(AntPathRequestMatcher.antMatcher("/user/**")).hasRole("USER") //hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/logout")).permitAll()
-//                                .requestMatchers(AntPathRequestMatcher.antMatcher("/mock/**")).permitAll()
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/")).hasAnyAuthority("admin", "cliente", "empleado") //permitiendo llamadas a esas urls.
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasAuthority("admin")
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/cliente/**")).hasAuthority("cliente")
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/empleado/**")).hasAuthority("empleado")
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/logout")).hasAnyAuthority("admin", "cliente", "empleado")
                                 .anyRequest().authenticated() //cualquier llamada debe ser validada
                 )
                 .formLogin((form) -> form

@@ -10,6 +10,9 @@ import java.util.List;
 public interface PackPurchasesRepository extends JpaRepository<PackPurchases, Integer> {
 
     List<PackPurchases> findAllByIdClienteOrIdEmpleado(int idCliente, int idEmpleado);
+
+    List<PackPurchases> findAllByEmpleadoIs(@NotNull boolean empleado);
+
 }
 
 

@@ -2,12 +2,9 @@ package edu.pucmm.clientemicroservice.clientes;
 
 import edu.pucmm.clientemicroservice.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @FeignClient(name = "SERVIDOR-PERIMETRAL")
 public interface ClienteFeign {
@@ -51,6 +48,9 @@ public interface ClienteFeign {
 
     @GetMapping("/purchase/read")
     List<PurchaseDto> readAllPurchase();
+
+    @GetMapping("/purchase/read/false")
+    List<PurchaseDto> readAllFalse();
 
     @PostMapping("/purchase/create")
     ReporteDTO createPackPurchase(@RequestBody PurchaseDto packPurchases);

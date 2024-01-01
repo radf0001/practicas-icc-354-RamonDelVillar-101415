@@ -54,6 +54,16 @@ public class PackPurchasesController {
         }
     }
 
+    @GetMapping("/read/false")
+    public List<PackPurchases> readAllFalse(){
+        try{
+            return packPurchasesService.getAllFalse();
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrio un error inseperado en el servidor");
+        }
+    }
+
+
     // Endpoint para crear compra, primero se hace que el id sea 0, para que no se pueda editar en este endpoint y luego se intenta salvar en la base de
     // de datos, tenemos 2 catch por si se dejan campos vacios o si ocurre un error inesperado
     @PostMapping("/create")

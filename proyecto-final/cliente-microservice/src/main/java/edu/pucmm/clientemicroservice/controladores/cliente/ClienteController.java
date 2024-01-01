@@ -1,21 +1,20 @@
 package edu.pucmm.clientemicroservice.controladores.cliente;
 
 import edu.pucmm.clientemicroservice.clientes.ClienteFeign;
-import edu.pucmm.clientemicroservice.dto.AuthenticationRequest;
-import edu.pucmm.clientemicroservice.dto.PackDto;
-import edu.pucmm.clientemicroservice.dto.PurchaseDto;
-import edu.pucmm.clientemicroservice.dto.UserDto;
+import edu.pucmm.clientemicroservice.dto.*;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @PreAuthorize("hasAuthority('cliente')")
@@ -33,7 +32,7 @@ public class ClienteController {
         params.put("paquetes", paquetes);
         params.put("logged", clienteFeign.readByEmailUser(new AuthenticationRequest(authentication.getName(), "")));
 
-        return new ModelAndView("packs", params);
+        return new ModelAndView("clientePacks", params);
     }
 
     @GetMapping("/purchase")
@@ -46,11 +45,56 @@ public class ClienteController {
         return new ModelAndView("purchases", params);
     }
 
-    @PostMapping("/purchase/create-update/")
-    public ModelAndView crearCompraPaquetePost(@ModelAttribute PurchaseDto purchase, RedirectAttributes redirectAttributes)
+    @GetMapping("/purchase/{id}")
+    public ModelAndView crearCompraPaqueteGet(Authentication authentication, @PathVariable int id, RedirectAttributes redirectAttributes)
     {
         try{
-            clienteFeign.createPackPurchase(purchase);
+            HashMap<String, Object> params = new HashMap<>();
+            UserDto userDto = clienteFeign.readByEmailUser(new AuthenticationRequest(authentication.getName(), ""));
+            params.put("logged", userDto);
+            params.put("datos", clienteFeign.readByIdPack(id));
+            return new ModelAndView("crearCompra", params);
+        } catch (FeignException e) {
+            String errorMessage = e.getMessage();
+            int startIndex = errorMessage.indexOf("\"message\":\"");
+            startIndex += "\"message\":\"".length();
+            int endIndex = errorMessage.indexOf("\"", startIndex);
+            String errorMessageValue = errorMessage.substring(startIndex, endIndex);
+            redirectAttributes.addFlashAttribute("msg", errorMessageValue);
+        }
+        return new ModelAndView("redirect:/cliente/pack");
+    }
+
+    @GetMapping("/procesarCompraPaypal")
+    public ModelAndView crearCompraPaquetePost(Model model, @RequestParam Map<String,String> params, Authentication authentication, RedirectAttributes redirectAttributes)
+    {
+        params.forEach((k,v) -> {
+            System.out.printf("[%s] = %s%n", k, v);
+        });
+        try{
+            UserDto userDto = clienteFeign.readByEmailUser(new AuthenticationRequest(authentication.getName(), ""));
+            PurchaseDto purchase = new PurchaseDto();
+            purchase.setIdCliente(userDto.getId());
+            purchase.setIdPaquete(Integer.parseInt(params.get("invoice")));
+            purchase.setFechaEvento(params.get("custom"));
+            ReporteDTO reporteDTO = clienteFeign.createPackPurchase(purchase);
+            byte[] bytes = Base64.decodeBase64(reporteDTO.getRawFile());
+            String fileName = reporteDTO.getNombreArchivo();
+
+            redirectAttributes.addFlashAttribute("pdfBytes", bytes);
+            redirectAttributes.addFlashAttribute("fileName", fileName);
+//            ReporteDTO reporteDTO = clienteFeign.createPackPurchase(purchase);
+//            byte[] bytes = Base64.decodeBase64(reporteDTO.getRawFile());
+//
+//            String mimeType = "application/pdf";
+//            response.setContentType(mimeType);
+//            response.setHeader("Content-Disposition", String.format("inline; filename=\"%s\"", reporteDTO.getNombreArchivo()));
+//            response.setContentLength(bytes.length);
+//
+//            try (OutputStream outputStream = response.getOutputStream()) {
+//                outputStream.write(bytes);
+//                outputStream.flush();
+//            }
             redirectAttributes.addFlashAttribute("msgSuccess", "Paquete creado exitosamente :)");
         } catch (FeignException e) {
             String errorMessage = e.getMessage();

@@ -23,6 +23,10 @@ public class PackPurchasesService {
         return packPurchasesRepository.findAll();
     }
 
+    public List<PackPurchases> getAllFalse(){
+        return packPurchasesRepository.findAllByEmpleadoIs(false);
+    }
+
     public Optional<PackPurchases> findById(int id){
         return packPurchasesRepository.findById(id);
     }

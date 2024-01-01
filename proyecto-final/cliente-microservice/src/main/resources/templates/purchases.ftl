@@ -25,7 +25,31 @@
     }
   </style>
 
-  <title>Compras</title>
+  <title>Mis Compras</title>
+  <script>
+    // Función para abrir el PDF en una nueva ventana o pestaña
+    function openPDFInNewTab(pdfData, fileName) {
+      var blob = new Blob([pdfData], { type: 'application/pdf' });
+      var url = window.URL.createObjectURL(blob);
+      var newTab = window.open(url, '_blank');
+      newTab.focus();
+    }
+
+    // Ejecutar la función al cargar la página
+    window.onload = function () {
+      var pdfBytes = ${pdfBytes!''}/* obtener pdfBytes del modelo */;
+      var fileName = ${fileName!''}/* obtener fileName del modelo */;
+
+      if (pdfBytes && fileName) {
+        // Llamar a la función para abrir el PDF
+        openPDFInNewTab(pdfBytes, fileName);
+      } else {
+        // Manejar el caso en el que las variables no estén definidas
+        console.error('pdfBytes y/o fileName no están definidos.');
+        // Puedes agregar un mensaje de error o realizar otra acción apropiada aquí
+      }
+    };
+  </script>
 </head>
 
 <body class="h-full">
@@ -40,12 +64,10 @@
             <div class="hidden sm:block">
               <div class="flex space-x-4">
                 <!-- Current: "bg-sky-700 text-white", Default: "text-white hover:bg-sky-500 hover:bg-opacity-75" -->
-                <a href="/admin/user"
-                   class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Usuarios</a>
-                <a href="/admin/pack"
+                <a href="/cliente/pack"
                    class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Paquetes</a>
                 <a href="#"
-                   class="px-3 py-2 text-sm font-medium text-white rounded-md bg-sky-700">Compras</a>
+                   class="px-3 py-2 text-sm font-medium text-white rounded-md bg-sky-700">Mis Compras</a>
               </div>
             </div>
           </div>
@@ -102,12 +124,10 @@
       <!-- Mobile menu, show/hide based on menu state. -->
       <div x-show="mobileMenuOpen" class="sm:hidden" id="mobile-menu">
         <div class="pt-2 pb-3 space-y-1">
-          <a href="/admin/user"
-             class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Usuarios</a>
-          <a href="/admin/pack"
+          <a href="/cliente/pack"
              class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-500 hover:bg-opacity-75">Paquetes</a>
           <a href="#"
-             class="block px-3 py-2 text-base font-medium text-white rounded-md bg-sky-700">Compras</a>
+             class="block px-3 py-2 text-base font-medium text-white rounded-md bg-sky-700">Mis Compras</a>
         </div>
         <div class="pt-4 pb-3 border-t border-sky-700">
           <div class="flex items-center px-5">
@@ -140,7 +160,7 @@
     <header class="py-10">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight text-white">
-          Compras
+          Mis Compras
         </h1>
       </div>
     </header>
