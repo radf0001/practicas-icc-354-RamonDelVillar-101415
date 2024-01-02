@@ -14,5 +14,5 @@ FROM eclipse-temurin:17.0.7_7-jre-alpine
 # creando la carpeta para el proyecto
 RUN mkdir /app
 # desde la otra instancia estaremos copiando lo necesario
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/microservicio.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/users-microservice.jar
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/users-microservice.jar"]
