@@ -244,7 +244,7 @@
                                     method="POST">
 
                                 <input type="hidden" name="cmd" value="_xclick">
-                                <input type="hidden" name="business" value="sb-emrrs28990479@business.example.com">
+                                <input type="hidden" name="business" value="sb-nx5b228991435@business.example.com">
                                 <input type="hidden" name="currency_code" value="USD">
 
                                 <input type="hidden" name="custom" value="{'param1': 'valor1', 'param2' : 'valor2'}">

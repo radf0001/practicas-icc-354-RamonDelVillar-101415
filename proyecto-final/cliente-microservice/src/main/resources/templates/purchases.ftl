@@ -29,7 +29,14 @@
   <script>
     // Función para abrir el PDF en una nueva ventana o pestaña
     function openPDFInNewTab(pdfData, fileName) {
-      var blob = new Blob([pdfData], { type: 'application/pdf' });
+      var byteCharacters = atob(pdfData);
+      var byteNumbers = new Array(byteCharacters.length);
+      for (var i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      var byteArray = new Uint8Array(byteNumbers);
+
+      var blob = new Blob([byteArray], { type: 'application/pdf' });
       var url = window.URL.createObjectURL(blob);
       var newTab = window.open(url, '_blank');
       newTab.focus();
@@ -37,15 +44,15 @@
 
     // Ejecutar la función al cargar la página
     window.onload = function () {
-      var pdfBytes = ${pdfBytes!''}/* obtener pdfBytes del modelo */;
-      var fileName = ${fileName!''}/* obtener fileName del modelo */;
+      var pdfBase64 = "${pdfBase64!''}"; // Obtener pdfBase64 del modelo
+      var fileName = "${fileName!''}"; // Obtener fileName del modelo
 
-      if (pdfBytes && fileName) {
+      if (pdfBase64 && fileName) {
         // Llamar a la función para abrir el PDF
-        openPDFInNewTab(pdfBytes, fileName);
+        openPDFInNewTab(pdfBase64, fileName);
       } else {
         // Manejar el caso en el que las variables no estén definidas
-        console.error('pdfBytes y/o fileName no están definidos.');
+        console.error('pdfBase64 y/o fileName no están definidos.');
         // Puedes agregar un mensaje de error o realizar otra acción apropiada aquí
       }
     };

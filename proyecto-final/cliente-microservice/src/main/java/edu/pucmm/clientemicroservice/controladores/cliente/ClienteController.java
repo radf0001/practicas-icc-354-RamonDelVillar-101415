@@ -78,10 +78,10 @@ public class ClienteController {
             purchase.setIdPaquete(Integer.parseInt(params.get("invoice")));
             purchase.setFechaEvento(params.get("custom"));
             ReporteDTO reporteDTO = clienteFeign.createPackPurchase(purchase);
-            byte[] bytes = Base64.decodeBase64(reporteDTO.getRawFile());
+            String base64 = reporteDTO.getRawFile();
             String fileName = reporteDTO.getNombreArchivo();
 
-            redirectAttributes.addFlashAttribute("pdfBytes", bytes);
+            redirectAttributes.addFlashAttribute("pdfBase64", base64);
             redirectAttributes.addFlashAttribute("fileName", fileName);
 //            ReporteDTO reporteDTO = clienteFeign.createPackPurchase(purchase);
 //            byte[] bytes = Base64.decodeBase64(reporteDTO.getRawFile());
