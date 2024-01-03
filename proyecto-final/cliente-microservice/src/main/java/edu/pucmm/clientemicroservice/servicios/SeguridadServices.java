@@ -25,9 +25,6 @@ public class SeguridadServices implements UserDetailsService {
 
     private final ClienteFeign clienteFeign;
 
-    /**
-     * Creando el usuario por defecto y su rol.
-     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("Autenticación JPA");

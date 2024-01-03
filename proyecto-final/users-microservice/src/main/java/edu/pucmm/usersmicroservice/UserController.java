@@ -94,7 +94,9 @@ public class UserController {
         }else{
             if(user1.get().getEmail().equalsIgnoreCase(user.getEmail()) || !userService.existsByEmail(user.getEmail())){
                 try{
-                    return userService.saveUser(user);
+                    User userCreate =  userService.saveUser(user);
+                    notificacionesClient.receiveRequestEmail(new EmailDTO(new String[]{userCreate.getEmail()}, "Su Usuario y Clave", String.format("Usuario: %s\n Clave: %s\n", userCreate.getEmail(), userCreate.getPassword())));
+                    return userCreate;
                 }catch (TransactionSystemException e){
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "No se permiten campos nulos o vacios");
                 }catch (Exception e){
