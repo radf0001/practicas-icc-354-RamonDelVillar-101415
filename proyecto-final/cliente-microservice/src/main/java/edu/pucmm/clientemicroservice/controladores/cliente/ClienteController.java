@@ -4,7 +4,6 @@ import edu.pucmm.clientemicroservice.clientes.ClienteFeign;
 import edu.pucmm.clientemicroservice.dto.*;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;

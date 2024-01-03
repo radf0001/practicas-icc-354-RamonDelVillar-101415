@@ -44,6 +44,7 @@ services:
     depends_on:
       - eureka-server
 
+
   base-datos-user:
     image: oscarfonts/h2
     restart: always
@@ -123,10 +124,10 @@ services:
     networks:
       - mi-red
     depends_on:
-      - zulu-server
       - microservicio-user
+      - zulu-server
       - microservicio-pack
-      - microservicio-purchase
+#      - microservicio-purchase
 
 
 

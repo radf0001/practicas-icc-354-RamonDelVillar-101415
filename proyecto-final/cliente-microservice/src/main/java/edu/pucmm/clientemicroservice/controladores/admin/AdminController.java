@@ -205,6 +205,6 @@ public class AdminController {
         }else{
             params.put("compras", clienteFeign.readByUserPurchaseId(id.get()));
         }
-        return new ModelAndView("purchases", params);
+        return new ModelAndView("adminPurchases", params);
     }
 }

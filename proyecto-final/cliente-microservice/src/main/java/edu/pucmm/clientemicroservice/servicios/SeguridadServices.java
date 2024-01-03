@@ -2,6 +2,7 @@ package edu.pucmm.clientemicroservice.servicios;
 
 import edu.pucmm.clientemicroservice.clientes.ClienteFeign;
 import edu.pucmm.clientemicroservice.dto.AuthenticationRequest;
+import edu.pucmm.clientemicroservice.dto.PackDto;
 import edu.pucmm.clientemicroservice.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -27,37 +28,6 @@ public class SeguridadServices implements UserDetailsService {
     /**
      * Creando el usuario por defecto y su rol.
      */
-//    public void crearUsuarios(){
-//
-//        if(usuarioRepository.findAll().isEmpty()){
-//            System.out.println("Creación del usuario y rol en la base de datos");
-//            Rol rolAdmin = new Rol("ROLE_ADMIN");
-//            Rol rolUsuario = new Rol("ROLE_USER");
-////            rolRepository.save(rolAdmin);
-////            rolRepository.save(rolUsuario);
-//
-//            Usuario admin = new Usuario();
-//            admin.setUsername("admin");
-//            admin.setPassword(passwordEncoder.encode("admin"));
-//            admin.setNombre("Administrador");
-//            admin.setApellido("Admin");
-//            admin.setRol("ROLE_ADMIN");
-//            admin.setRoles(new HashSet<>(Arrays.asList(rolAdmin)));
-//            admin.setActivo(true);
-//            usuarioRepository.save(admin);
-//
-//            Usuario user = new Usuario();
-//            user.setUsername("user");
-//            user.setPassword(passwordEncoder.encode("user"));
-//            user.setNombre("Usuario");
-//            user.setApellido("User");
-//            user.setRoles(new HashSet<>(Arrays.asList(rolUsuario)));
-//            user.setActivo(true);
-//            user.setRol("ROLE_USER");
-//            usuarioRepository.save(user);
-//        }
-//    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("Autenticación JPA");
