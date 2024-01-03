@@ -1,5 +1,7 @@
 package edu.pucmm.usersmicroservice;
 
+import edu.pucmm.usersmicroservice.client.NotificacionesClient;
+import edu.pucmm.usersmicroservice.dto.EmailDTO;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final NotificacionesClient notificacionesClient;
 
     // Endpoint devuelve un usuario por id y si no existe en la base de datos devuelve un error 404 con un mensaje de que no existe el usuario
     @GetMapping("/read/{id}")
@@ -66,7 +69,9 @@ public class UserController {
         user.setEmail(user.getEmail().toLowerCase());
         if (!userService.existsByEmail(user.getEmail())) {
             try {
-                return userService.saveUser(user);
+                User userCreate =  userService.saveUser(user);
+                notificacionesClient.receiveRequestEmail(new EmailDTO(new String[]{userCreate.getEmail()}, "Su Usuario y Clave", String.format("Usuario: %s\n Clave: %s\n", userCreate.getEmail(), userCreate.getPassword())));
+                return userCreate;
             }catch (ConstraintViolationException e){
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "No se permiten campos nulos o vacios");
             }catch (Exception e){
