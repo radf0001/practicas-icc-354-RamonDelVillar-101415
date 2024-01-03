@@ -127,7 +127,8 @@ services:
       - microservicio-user
       - zulu-server
       - microservicio-pack
-#      - microservicio-purchase
+      - microservicio-purchase
+      - microservicio-notificaciones
 
 
 
